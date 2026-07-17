@@ -1,0 +1,531 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nova Craft | Servidor Oficial</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700;900&display=swap" rel="stylesheet">
+    <style>
+        /* Configuración Global y Colores Nova Craft */
+        :root {
+            --bg-principal: #0b0914;
+            --bg-secundario: #141124;
+            --bg-tarjeta: #1c1832;
+            --morado-neon: #9B30FF;
+            --morado-pastel: #b983ff;
+            --verde-lima: #00FF99;
+            --rojo-neon: #FF0055;
+            --texto: #ffffff;
+            --texto-secundario: #a5a1b8;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background-color: var(--bg-principal);
+            color: var(--texto);
+            overflow-x: hidden;
+        }
+
+        /* Barra de Navegación */
+        nav {
+            background: rgba(20, 17, 36, 0.95);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            border-bottom: 2px solid #251f3b;
+            backdrop-filter: blur(5px);
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 20px;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 900;
+            color: var(--morado-neon);
+            text-shadow: 0 0 10px rgba(155, 48, 255, 0.5);
+            text-transform: uppercase;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 20px;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: var(--texto);
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.95rem;
+            transition: 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: var(--morado-pastel);
+        }
+
+        /* Contenedor General */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Sección de Inicio (Hero) */
+        .hero {
+            text-align: center;
+            padding: 150px 20px 80px 20px;
+            background: linear-gradient(180deg, rgba(138, 43, 226, 0.25) 0%, rgba(11, 9, 20, 0) 100%);
+        }
+
+        .hero h1 {
+            font-size: 4.5rem;
+            font-weight: 900;
+            text-transform: uppercase;
+            color: var(--morado-neon);
+            text-shadow: 0 0 30px rgba(155, 48, 255, 0.8);
+            margin-bottom: 5px;
+        }
+
+        .hero p {
+            font-size: 1.3rem;
+            color: var(--morado-pastel);
+            margin-bottom: 35px;
+        }
+
+        /* Widgets de Estado e IP */
+        .status-panel {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            flex-wrap: wrap;
+            margin-bottom: 50px;
+        }
+
+        .ip-box, .status-box {
+            background: var(--bg-secundario);
+            border: 2px solid #2a234a;
+            border-radius: 14px;
+            padding: 15px 25px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+        }
+
+        .ip-text {
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: var(--verde-lima);
+        }
+
+        .btn-copy {
+            background: var(--morado-neon);
+            color: white;
+            border: none;
+            padding: 8px 18px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: 0.3s;
+        }
+
+        .btn-copy:hover {
+            box-shadow: 0 0 15px var(--morado-neon);
+            transform: scale(1.05);
+        }
+
+        .status-dot {
+            width: 12px;
+            height: 12px;
+            background-color: var(--verde-lima);
+            border-radius: 50%;
+            box-shadow: 0 0 10px var(--verde-lima);
+        }
+
+        /* Botones de Acción */
+        .hero-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-bottom: 20px;
+        }
+
+        .btn {
+            padding: 15px 35px;
+            font-size: 1.1rem;
+            font-weight: 700;
+            border-radius: 10px;
+            text-decoration: none;
+            transition: 0.3s ease;
+            display: inline-block;
+        }
+
+        .btn-discord {
+            background: #5865F2;
+            color: white;
+            box-shadow: 0 5px 15px rgba(88, 101, 242, 0.4);
+        }
+
+        .btn-discord:hover {
+            background: #4752c4;
+            transform: translateY(-3px);
+        }
+
+        /* Secciones de Contenido */
+        section {
+            padding: 80px 0 40px 0;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2.5rem;
+            text-transform: uppercase;
+            margin-bottom: 50px;
+            color: white;
+            position: relative;
+        }
+
+        .section-title::after {
+            content: '';
+            display: block;
+            width: 60px;
+            height: 4px;
+            background: var(--morado-neon);
+            margin: 10px auto 0 auto;
+            border-radius: 2px;
+        }
+
+        /* Cuadrículas (Grids) */
+        .grid-3 {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+
+        .card {
+            background: var(--bg-tarjeta);
+            border: 1px solid #2c254d;
+            border-radius: 14px;
+            padding: 30px;
+            transition: 0.3s;
+        }
+
+        .card:hover {
+            border-color: var(--morado-neon);
+            transform: translateY(-5px);
+        }
+
+        .card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+            color: var(--morado-pastel);
+        }
+
+        .card p {
+            color: var(--texto-secundario);
+            font-size: 0.95rem;
+            line-height: 1.6;
+        }
+
+        /* Tienda / Rangos */
+        .rango-vip {
+            border: 2px solid #ffa000;
+            position: relative;
+        }
+
+        .rango-vip::top {
+            content: 'POPULAR';
+        }
+
+        .precio {
+            font-size: 1.8rem;
+            font-weight: 900;
+            color: var(--verde-lima);
+            margin: 15px 0;
+        }
+
+        .beneficios {
+            list-style: none;
+            text-align: left;
+            margin-bottom: 20px;
+            font-size: 0.9rem;
+            color: var(--texto-secundario);
+        }
+
+        .beneficios li {
+            margin-bottom: 8px;
+        }
+
+        /* Sección Staff */
+        .staff-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 25px;
+        }
+
+        .staff-card {
+            background: var(--bg-secundario);
+            border-radius: 14px;
+            padding: 25px;
+            text-align: center;
+            border-top: 4px solid var(--morado-neon);
+        }
+
+        .staff-admin { border-top-color: var(--rojo-neon); }
+        .staff-mod { border-top-color: var(--verde-lima); }
+
+        .staff-avatar {
+            width: 80px;
+            height: 80px;
+            background: #3c3561;
+            border-radius: 50%;
+            margin: 0 auto 15px auto;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+        }
+
+        .staff-card h4 { font-size: 1.2rem; margin-bottom: 5px; }
+        .staff-card span { font-size: 0.85rem; font-weight: 600; text-transform: uppercase; }
+
+        /* Acordeón de preguntas frecuentes */
+        .faq-item {
+            background: var(--bg-secundario);
+            margin-bottom: 15px;
+            border-radius: 8px;
+            overflow: hidden;
+            border: 1px solid #2a234a;
+        }
+
+        .faq-question {
+            padding: 20px;
+            font-weight: 600;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            background: var(--bg-tarjeta);
+        }
+
+        .faq-answer {
+            padding: 0 20px;
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease, padding 0.3s ease;
+            color: var(--texto-secundario);
+            font-size: 0.95rem;
+        }
+
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: 50px 20px;
+            color: #565175;
+            font-size: 0.9rem;
+            border-top: 2px solid var(--bg-secundario);
+            margin-top: 60px;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Menú de navegación -->
+    <nav>
+        <div class="nav-container">
+            <div class="logo">Nova Craft</div>
+            <ul class="nav-links">
+                <li><a href="#inicio">Inicio</a></li>
+                <li><a href="#modalidades">Modalidades</a></li>
+                <li><a href="#rangos">Rangos</a></li>
+                <li><a href="#staff">Staff</a></li>
+                <li><a href="#faq">Ayuda</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <div id="inicio"></div>
+
+    <!-- Sección Principal -->
+    <header class="hero">
+        <h1>Nova Craft</h1>
+        <p>¡El Survival Void SMP definitivo que estabas esperando!</p>
+        
+        <div class="status-panel">
+            <div class="ip-box">
+                <span class="ip-text" id="serverIp">novacraft-void-smp.aternos.me:43595</span>
+                <button class="btn-copy" onclick="copiarIP()">Copiar IP</button>
+            </div>
+            <div class="status-box">
+                <div class="status-dot"></div>
+                <span style="font-weight: 600; color: #00FF99;">Servidor Online</span>
+            </div>
+        </div>
+
+        <div class="hero-buttons">
+            <a href="TU_LINK_DE_DISCORD_AQUI" target="_blank" class="btn btn-discord">💬 Servidor de Discord</a>
+        </div>
+    </header>
+
+    <div class="container">
+
+        <!-- 1. Modalidades -->
+        <section id="modalidades">
+            <h2 class="section-title">Nuestras Características</h2>
+            <div class="grid-3">
+                <div class="card">
+                    <h3>🌌 Void SMP Especial</h3>
+                    <p>Una mecánica única de supervivencia avanzada donde el vacío es tu mayor peligro y tu mayor aliado. ¿Podrás aguantar la presión?</p>
+                </div>
+                <div class="card">
+                    <h3>🛒 Economía Fluida</h3>
+                    <p>Crea tu propia tienda, comercia con billetes virtuales del juego o haz trueques con otros miembros del servidor para volverte el más rico.</p>
+                </div>
+                <div class="card">
+                    <h3>🛡️ Protecciones Anti-Grief</h3>
+                    <p>¡Tus horas de esfuerzo están a salvo! Protege tus mega construcciones, cofres y granjas de intrusos molestos con comandos simples.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- 2. Tienda de Rangos -->
+        <section id="rangos">
+            <h2 class="section-title">Rangos VIP del Servidor</h2>
+            <div class="grid-3">
+                <div class="card">
+                    <h3>✨ Rango VIP</h3>
+                    <div class="precio">$1.99 / Mes</div>
+                    <ul class="beneficios">
+                        <li>• Prefijo [VIP] en el chat</li>
+                        <li>• Acceso al comando /fly en el lobby</li>
+                        <li>• 3 Hogares (/sethome) extra</li>
+                        <li>• Kit VIP semanal</li>
+                    </ul>
+                </div>
+                <div class="card rango-vip">
+                    <h3>🔮 Rango VIP+</h3>
+                    <div class="precio">$3.99 / Mes</div>
+                    <ul class="beneficios">
+                        <li>• Prefijo [VIP+] llamativo</li>
+                        <li>• Comandos /feed y /heal (cooldown)</li>
+                        <li>• 5 Hogares (/sethome) extra</li>
+                        <li>• Kit VIP+ único con armaduras especiales</li>
+                    </ul>
+                </div>
+                <div class="card" style="border-color: var(--morado-neon);">
+                    <h3>⚡ Booster Especial</h3>
+                    <div class="precio">¡GRATIS!</div>
+                    <p style="margin-bottom: 15px;">Consíguelo mejorando nuestro servidor de Discord con Nitro.</p>
+                    <ul class="beneficios">
+                        <li>• Rol exclusivo de color rosa</li>
+                        <li>• Multiplicador de dinero x1.5</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- 3. Equipo de Staff -->
+        <section id="staff">
+            <h2 class="section-title">Equipo Administrativo</h2>
+            <div class="staff-grid">
+                <div class="staff-card staff-admin">
+                    <div class="staff-avatar">👑</div>
+                    <h4>TuNombre</h4>
+                    <span style="color: var(--rojo-neon);">Fundador</span>
+                </div>
+                <div class="staff-card staff-admin">
+                    <div class="staff-avatar">🛡️</div>
+                    <h4>Admin</h4>
+                    <span style="color: #FF5555;">Administrador</span>
+                </div>
+                <div class="staff-card staff-mod">
+                    <div class="staff-avatar">⚔️</div>
+                    <h4>Moderador</h4>
+                    <span style="color: var(--verde-lima);">Moderador</span>
+                </div>
+                <div class="staff-card">
+                    <div class="staff-avatar">🛠️</div>
+                    <h4>Soporte</h4>
+                    <span style="color: var(--morado-pastel);">Soporte</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- 4. Centro de Ayuda (FAQ) -->
+        <section id="faq">
+            <h2 class="section-title">Preguntas Frecuentes</h2>
+            <div class="faq-item">
+                <div class="faq-question" onclick="toggleFaq(this)">¿Cómo entro a jugar en Nova Craft? <span>+</span></div>
+                <div class="faq-answer"><p>Copia nuestra IP oficial, abre tu Minecraft (versión recomendada 1.20 en adelante), ve a Multijugador > Añadir Servidor y pégala allí. ¡Asegúrate de que el servidor esté prendido en Aternos!</p></div>
+            </div>
+            <div class="faq-item">
+                <div class="faq-question" onclick="toggleFaq(this)">¿Se permiten alianzas o PvP? <span>+</span></div>
+                <div class="faq-answer"><p>Las alianzas están más que permitidas en el Survival. El PvP solo está habilitado en zonas específicas como la Arena PvP o en zonas salvajes fuera de los reclamos.</p></div>
+            </div>
+            <div class="faq-item">
+                <div class="faq-question" onclick="toggleFaq(this)">¿Qué hago si encuentro un bug o un hacker? <span>+</span></div>
+                <div class="faq-answer"><p>Entra de inmediato a nuestro servidor de Discord y abre un ticket de soporte. Nuestro equipo te atenderá de inmediato.</p></div>
+            </div>
+        </section>
+
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        &copy; 2026 Nova Craft Network. Todos los derechos reservados.<br>
+        No estamos vinculados de ninguna manera oficial con Mojang Studios ni Microsoft.
+    </footer>
+
+    <!-- Código Javascript Interactivo -->
+    <script>
+        // Función para copiar la IP
+        function copiarIP() {
+            const ipTexto = document.getElementById('serverIp').innerText;
+            navigator.clipboard.writeText(ipTexto).then(() => {
+                const btn = document.querySelector('.btn-copy');
+                btn.innerText = '¡Copiado!';
+                btn.style.background = 'var(--verde-lima)';
+                btn.style.color = '#0b0914';
+                
+                setTimeout(() => {
+                    btn.innerText = 'Copiar IP';
+                    btn.style.background = 'var(--morado-neon)';
+                    btn.style.color = 'white';
+                }, 2000);
+            });
+        }
+
+        // Función interactiva para el foro de preguntas (FAQ)
+        function toggleFaq(elemento) {
+            const respuesta = elemento.nextElementSibling;
+            const signo = elemento.querySelector('span');
+            
+            if (respuesta.style.maxHeight && respuesta.style.maxHeight !== '0px') {
+                respuesta.style.maxHeight = '0px';
+                respuesta.style.padding = '0px 20px';
+                signo.innerText = '+';
+            } else {
+                respuesta.style.maxHeight = respuesta.scrollHeight + 'px';
+                respuesta.style.padding = '15px 20px';
+                signo.innerText = '-';
+            }
+        }
+    </script>
+
+</body>
+</html>
